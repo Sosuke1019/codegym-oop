@@ -1,15 +1,8 @@
 class JankenGame:
     # Rule を引数で受け取るように書き換えよう
-    def play(self, left_hand: int, right_hand: int, display, rule_name: str):
-        rule = self.get_rule(rule_name)
+    def play(self, left_hand: int, right_hand: int, display, rule):
         result = rule.judge(left_hand, right_hand)
         display.show(result)
-
-    def get_rule(self, rule_name: str):
-        if rule_name == "default":
-            return NormalRule()
-        else:
-            return ReverseRule()
 
 
 class JapaneseDisplay:
@@ -84,9 +77,10 @@ class ReverseRule:
 
 def main():
     game = JankenGame()
-    game.play(0, 2, JapaneseDisplay(), "default")
-    game.play(1, 2, JapaneseDisplay(), "default")
-    game.play(2, 2, JapaneseDisplay(), "default")
+    rule = NormalRule()
+    game.play(0, 2, JapaneseDisplay(), rule)
+    game.play(1, 2, JapaneseDisplay(), rule)
+    game.play(2, 2, JapaneseDisplay(), rule)
 
 
 if __name__ == '__main__':
