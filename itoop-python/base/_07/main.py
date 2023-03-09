@@ -1,8 +1,12 @@
 # コンストラクタを定義して、display と rule を受け取ってフィールドに格納して利用しよう
 class JankenGame:
-    def play(self, left_hand: int, right_hand: int, display, rule):
-        result = rule.judge(left_hand, right_hand)
-        display.show(result)
+    def __init__(self, display, rule) :
+        self.display = display
+        self.rule = rule
+
+    def play(self, left_hand: int, right_hand: int):
+        result = self.rule.judge(left_hand, right_hand)
+        self.display.show(result)
 
 
 class JapaneseDisplay:
@@ -78,10 +82,10 @@ class ReverseRule:
 def main():
     display = JapaneseDisplay()
     rule = NormalRule()
-    game = JankenGame()
-    game.play(0, 2, display, rule)
-    game.play(1, 2, display, rule)
-    game.play(2, 2, display, rule)
+    game = JankenGame(display, rule)
+    game.play(0, 2)
+    game.play(1, 2)
+    game.play(2, 2)
 
 
 if __name__ == '__main__':
